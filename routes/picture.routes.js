@@ -4,9 +4,7 @@ const mongoose = require("mongoose");
 
 // FileUploader
 const fileUploader = require("../config/cloudinary.config");
-
 const Picture = require("../models/Picture.model");
-
 const User = require("../models/User.model");
 
 // POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
@@ -34,9 +32,12 @@ router.post("/pictures", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-//  GET /api/pictures -  Retrieves all of the pictures
-router.get("/pictures", (req, res, next) => {
-  Picture.find()
+//  GET /api/pictures -  Retrieves pictures by userID
+// router.get("/pictures/:userID", (req, res, next) => {
+  router.get("/pictures", (req, res, next) => {
+  console.log(req.query)
+  const { userID } = req.query;
+  Picture.find({ user: userID })
     .then((allPictures) => res.json(allPictures))
     .catch((err) => res.json(err));
 });
