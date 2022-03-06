@@ -4,9 +4,11 @@ const { Schema, model } = mongoose;
 const pictureSchema = new Schema({
   title: String,
   description: String,
-  // email: String,
   imageUrl: String,
-  user: { type: Schema.Types.ObjectId, ref: "User" }
+  user: { type: Schema.Types.ObjectId, ref: "User" },
+  isSelected: { type: Boolean, default: false },
+  numberInBook: {type: Number, default: 0},
+  pageInBook: {type: Number, default: 0}
 },
 {
   timestamps: {createdAt: 'dateSubmitted'}
