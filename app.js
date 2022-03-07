@@ -18,6 +18,9 @@ app.use("/api", isAuthenticated, pictureRouter);
 const taskRouter = require("./routes/task.routes");
 app.use("/api", isAuthenticated, taskRouter);
 
+const userRouter = require("./routes/user.routes");
+app.use("/api", isAuthenticated, userRouter);
+
 const authRouter = require("./routes/auth.routes");
 app.use("/auth", authRouter);  
 

@@ -8,10 +8,30 @@ const Book = require("../models/Book.model");
 router.post("/book", (req, res, next) => {
   const { selectedPictures, price } = req.body;
 
-  console.log(price);
   Book.create({ picture: selectedPictures, price })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
+
+//READ
+router.get("/book", (req, res, next) => {
+  Book.find()
+    .then((allBooks) => res.json(allBooks))
+    .catch((err) => res.json(err));
+});
+
+//DELETE
+router.delete("/book/:bookId", (req, res, next) => {
+  const { bookId } = req.params;
+
+  Book.findByIdAndRemove(bookId)
+    .then(() =>
+      res.json({
+        message: `Picture with ${bookId} is removed successfully.`,
+      })
+    )
+    .catch((error) => res.json(error));
+});
+
 
 module.exports = router;
