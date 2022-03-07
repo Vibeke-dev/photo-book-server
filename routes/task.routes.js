@@ -2,19 +2,14 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 
-const BookModel = require("../models/Book.model");
-const Project = require("../models/Picture.model");
+const Book = require("../models/Book.model");
 
-//  POST /api/tasks  -  Creates a new book
-router.post("/tasks", (req, res, next) => {
-  const { title, description, projectId } = req.body;
+//  CREATE - POST /api/book  -  Create a new book
+router.post("/book", (req, res, next) => {
+  const { selectedPictures, price } = req.body;
 
-  BookModel.create({ title, description, project: projectId })
-    .then((newTask) => {
-      return Project.findByIdAndUpdate(projectId, {
-        $push: { tasks: newTask._id },
-      });
-    })
+  console.log(price);
+  Book.create({ picture: selectedPictures, price })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });

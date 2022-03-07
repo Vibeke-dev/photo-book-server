@@ -32,14 +32,25 @@ router.post("/pictures", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+//TODO:
 //  GET /api/pictures -  Retrieves pictures by userID
 // router.get("/pictures/:userID", (req, res, next) => {
   router.get("/pictures", (req, res, next) => {
   console.log(req.query)
-  const { userID } = req.query;
-  Picture.find({ user: userID })
+  const { userID } = req.query;  
+  const { isSelected } = req.query;
+
+  if (isSelected===undefined){
+    Picture.find({ user: userID })
+    .then((allPictures) => res.json(allPictures))
+    .catch((err) => res.json(err)); 
+  }
+  else {
+    Picture.find({ user: userID, isSelected }).sort({numberInBook: 1})
     .then((allPictures) => res.json(allPictures))
     .catch((err) => res.json(err));
+  }
+  
 });
 
 //  GET /api/pictures/:pictureId -  Retrieves a specific picture by id
