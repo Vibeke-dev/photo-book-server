@@ -5,10 +5,10 @@ const pictureSchema = new Schema({
   title: String,
   description: String,
   imageUrl: String,
+  purchased: { type: String, default: 'no' },
   user: { type: Schema.Types.ObjectId, ref: "User" },
   isSelected: { type: Boolean, default: false },
-  numberInBook: {type: Number, default: 0},
-  pageInBook: {type: Number, default: 0}
+  numberInBook: {type: Number, default: 0}
 },
 {
   timestamps: {createdAt: 'dateSubmitted'}
