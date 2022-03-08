@@ -15,8 +15,8 @@ app.use("/api", allRoutes);
 const pictureRouter = require("./routes/picture.routes");
 app.use("/api", isAuthenticated, pictureRouter); 
 
-const taskRouter = require("./routes/task.routes");
-app.use("/api", isAuthenticated, taskRouter);
+const bookRouter = require("./routes/book.routes");
+app.use("/api", isAuthenticated, bookRouter);
 
 const userRouter = require("./routes/user.routes");
 app.use("/api", isAuthenticated, userRouter);
