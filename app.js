@@ -9,8 +9,8 @@ const app = express();
 require("./config")(app);
 
 // 👇 Start handling routes here
-const allRoutes = require("./routes");
-app.use("/api", allRoutes);
+const allRoutes = require("./routes/index");
+app.use("/", allRoutes);
 
 const pictureRouter = require("./routes/picture.routes");
 app.use("/api", isAuthenticated, pictureRouter); 
