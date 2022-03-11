@@ -13,7 +13,7 @@ const allRoutes = require("./routes/index");
 app.use("/", allRoutes);
 
 const pictureRouter = require("./routes/picture.routes");
-app.use("/api", isAuthenticated, pictureRouter); 
+app.use("/api", pictureRouter); 
 
 const bookRouter = require("./routes/book.routes");
 app.use("/api", isAuthenticated, bookRouter);
