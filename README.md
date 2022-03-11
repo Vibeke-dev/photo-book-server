@@ -3,6 +3,7 @@
 This project contains of two parts, a server side and a client side. With this app you can create and purchase a photo book with images and descriptions. This part is the server side, which is handling the users, pictures and the purchased books.
 
 #### User Stories
+Below user stories are made to be able to handle creation of user and get user validated when user try to log in on the homepage. The user should be able to upload picture in the database, change and read their own pictures, and finally delete their own pictures from the data base. The user should be able buy a photo book based on their own pictures. Finally, when book is bought then admin of the site should be able to delete the book when it is printed.
 
 - Creation of auth routes (create, read)
 - Creation of user routes (read)
@@ -71,7 +72,6 @@ This project contains of two parts, a server side and a client side. With this a
 | PUT       | `/api/pictures/:pictureId` | JSON         | Updates a specific picture by id                                                    |
 | DELETE    | `/api/pictures/:pictureId` | (empty)      | Deletes a specific picture by id                                                    |
 
-
 ##### Book routes
 
 | HTTP verb | URL                        | Request body | Action                        |
@@ -80,34 +80,29 @@ This project contains of two parts, a server side and a client side. With this a
 | GET       | `/api/book`                | (empty)      | Retrieves all books           |
 | DELETE    | `/api/book/:bookId`        | (empty)      | Deletes a specific book by id |
 
-
-
 ##### User routes
 
 | HTTP verb | URL                  | Request body | Action                     |
 | --------- | -------------------- | ------------ | -------------------------- |
 | GET       | `/api/user/:userId`  | (empty)      | Get user by id             |
 
+##### Auth routes
+| HTTP verb | URL                        | Request body | Action                                         |
+| --------- | -------------------------- | ------------ | ---------------------------------------------- |
+| POST      | `/auth/signup`             | JSON         | Creates a new user in the database             |
+| POST      | `/auth/login`              | JSON         | Verifies email and password and returns a JWT  |
+| GET       | `/auth/verify`             | (empty)      | Used to verify JWT stored on the client        |
+
 <hr>
 
-#### Models
+#### Project Link
+Below link is the final app:
+- https://photo-book2.netlify.app/pictures
 
-##### Project Model
+#### Future Work
+- Next step on the server side will be to handle the payment when buying a photo book
 
-```js
-{
-  title: String,
-  description: String,
-  tasks: [ { type: Schema.Types.ObjectId, ref: 'Task' } ]
-}
-```
+#### Team member
+This project is done by me - Vibeke G Jørgensen
 
-##### Task Model
 
-```js
-{
-  title: String,
-  description: String,
-  project: { type: Schema.Types.ObjectId, ref: 'Project' }
-}
-```
