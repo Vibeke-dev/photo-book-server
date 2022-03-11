@@ -33,5 +33,4 @@ router.delete("/book/:bookId", (req, res, next) => {
     .catch((error) => res.json(error));
 });
 
-
 module.exports = router;

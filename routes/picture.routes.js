@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-
-// FileUploader
 const fileUploader = require("../config/cloudinary.config");
 const Picture = require("../models/Picture.model");
 const User = require("../models/User.model");
@@ -13,7 +11,7 @@ router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
     next(new Error("No file uploaded!"));
     return;
   }
-  
+
   // Get the URL of the uploaded file and send it as a response.
   // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
   res.json({ fileUrl: req.file.path });
@@ -33,25 +31,22 @@ router.post("/pictures", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-//TODO:
 //  GET /api/pictures -  Retrieves pictures by userID
 // router.get("/pictures/:userID", (req, res, next) => {
-  router.get("/pictures", (req, res, next) => {
-  console.log(req.query)
-  const { userID } = req.query;  
+router.get("/pictures", (req, res, next) => {
+  const { userID } = req.query;
   const { isSelected } = req.query;
 
-  if (isSelected===undefined){
+  if (isSelected === undefined) {
     Picture.find({ user: userID })
-    .then((allPictures) => res.json(allPictures))
-    .catch((err) => res.json(err)); 
+      .then((allPictures) => res.json(allPictures))
+      .catch((err) => res.json(err));
   }
   else {
-    Picture.find({ user: userID, isSelected }).sort({numberInBook: 1})
-    .then((allPictures) => res.json(allPictures))
-    .catch((err) => res.json(err));
+    Picture.find({ user: userID, isSelected }).sort({ numberInBook: 1 })
+      .then((allPictures) => res.json(allPictures))
+      .catch((err) => res.json(err));
   }
-  
 });
 
 //  GET /api/pictures/:pictureId -  Retrieves a specific picture by id

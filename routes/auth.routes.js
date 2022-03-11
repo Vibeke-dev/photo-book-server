@@ -1,5 +1,3 @@
-// routes/auth.routes.js
-
 const express = require("express");
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
@@ -8,7 +6,6 @@ const User = require("../models/User.model");
 const router = express.Router();
 const { isAuthenticated } = require('./../middleware/jwt.middleware.js');
 const saltRounds = 10;
-
 
 // POST /auth/signup  - Creates a new user in the database
 router.post('/signup', (req, res, next) => {
@@ -33,7 +30,6 @@ router.post('/signup', (req, res, next) => {
     res.status(400).json({ message: 'Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.' });
     return;
   }
- 
  
   // Check the users collection if a user with the same email already exists
   User.findOne({ email })
@@ -68,7 +64,6 @@ router.post('/signup', (req, res, next) => {
       res.status(500).json({ message: "Internal Server Error" })
     });
 });
-
 
 // POST  /auth/login - Verifies email and password and returns a JWT
 router.post('/login', (req, res, next) => {
@@ -113,23 +108,18 @@ router.post('/login', (req, res, next) => {
       else {
         res.status(401).json({ message: "Unable to authenticate the user" });
       }
- 
     })
     .catch(err => res.status(500).json({ message: "Internal Server Error" }));
 });
 
-
 // GET  /auth/verify  -  Used to verify JWT stored on the client
-router.get('/verify', isAuthenticated, (req, res, next) => {       // <== CREATE NEW ROUTE
+router.get('/verify', isAuthenticated, (req, res, next) => {
  
   // If JWT token is valid the payload gets decoded by the
   // isAuthenticated middleware and made available on `req.payload`
-  console.log(`req.payload`, req.payload);
- 
   // Send back the object with user data
   // previously set as the token payload
   res.status(200).json(req.payload);
 });
-
 
 module.exports = router;
