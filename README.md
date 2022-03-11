@@ -17,7 +17,6 @@ Below user stories are made to be able to handle creation of user and get user v
 - Java Script
 - Node Express
 - Bcrypt
-- Axios
 - MongoDB Atlas
 - Heroku
 - Mongoose
